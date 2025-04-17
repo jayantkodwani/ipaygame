@@ -55,8 +55,8 @@ function renderBoard() {
       const cell = document.createElement('div');
       cell.className = 'cell';
       cell.style.border = '1px solid #000';
-      cell.style.width = '30px';
-      cell.style.height = '30px';
+      cell.style.width = '50px';
+      cell.style.height = '50px';
       cell.style.display = 'flex';
       cell.style.justifyContent = 'center';
       cell.style.alignItems = 'center';
