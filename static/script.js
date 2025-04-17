@@ -93,7 +93,7 @@ function revealCell(r, c) {
   revealed[r][c] = true;
   if (board[r][c] === 'M') {
     clearInterval(timerInterval);
-    alert('Game Over! Boom, You hit a mine.');
+    alert('💣 Boom! Game Over,  You hit a mine.');
     startGame();  // 🔥 This line resets the game board after alert is dismissed
     return;
   } else {
