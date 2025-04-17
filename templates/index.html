@@ -7,6 +7,19 @@
 <body>
     <img src="/static/logo.jpg" alt="Game Logo" style="height: 60px; margin-bottom: 10px;">
   <h1>Minesweeper - iPay Magazine</h1>
+ <!-- Game Instructions -->
+  <div style="background-color: #f0f0f0; padding: 10px; margin-bottom: 15px; border-radius: 5px; max-width: 500px;">
+    <strong>How to Play:</strong>
+    <ul>
+      <li>Enter your name to start.</li>
+      <li>Left-click to reveal a cell.</li>
+      <li>Right-click to flag a cell suspected to have a mine (🚩).</li>
+      <li>The timer starts with your first click.</li>
+      <li>Reveal all non-mine cells to win the game! Don't forget to submit your scores by clicking Submit button</li>
+      <li>If you hit a mine, the game will reset automatically.</li>
+    </ul>
+  </div>
+  
   <label>Name: <input type="text" id="playerName" /></label>
   <div id="minesweeper-board" style="margin-top: 20px;"></div>
   <p>Time: <span id="timer">0</span> seconds</p>
