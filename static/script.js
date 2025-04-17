@@ -94,18 +94,37 @@ function revealCell(r, c) {
   if (board[r][c] === 'M') {
     clearInterval(timerInterval);
     alert('Game Over! You hit a mine.');
-  } else if (board[r][c] === 0) {
-    for (let i = -1; i <= 1; i++) {
-      for (let j = -1; j <= 1; j++) {
-        let nr = r + i;
-        let nc = c + j;
-        if (nr >= 0 && nr < boardSize && nc >= 0 && nc < boardSize) {
-          revealCell(nr, nc);
+  } else {
+    if (board[r][c] === 0) {
+      for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+          let nr = r + i;
+          let nc = c + j;
+          if (nr >= 0 && nr < boardSize && nc >= 0 && nc < boardSize) {
+            revealCell(nr, nc);
+          }
         }
       }
     }
+    checkWin();
   }
   renderBoard();
+}
+
+function checkWin() {
+  let safeCells = boardSize * boardSize - mineCount;
+  let revealedCount = 0;
+  for (let r = 0; r < boardSize; r++) {
+    for (let c = 0; c < boardSize; c++) {
+      if (revealed[r][c] && board[r][c] !== 'M') {
+        revealedCount++;
+      }
+    }
+  }
+  if (revealedCount === safeCells) {
+    clearInterval(timerInterval);
+    alert('🎉 Congratulations! You cleared the board!');
+  }
 }
 
 function flagCell(r, c) {
@@ -123,12 +142,17 @@ function startGame() {
 }
 
 function submitScore() {
+  const name = document.getElementById('playerName').value.trim();
+
   if (!gameStarted) {
     alert("You haven't started the game yet!");
     return;
   }
+  if (!name) {
+    alert("Please enter your name before submitting.");
+    return;
+  }
 
-  const name = document.getElementById('playerName').value;
   const score = Math.floor((Date.now() - startTime) / 1000);
 
   fetch('/submit-score', {
