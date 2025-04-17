@@ -75,8 +75,7 @@ function renderBoard() {
       };
       if (flagged[r][c]) {
         cell.innerText = "🚩";
-        cell.style.backgroundColor = "#eee";
-      } else if (revealed[r][c]) {
+         } else if (revealed[r][c]) {
         cell.innerText = board[r][c] === 0 ? '' : board[r][c];
         if (board[r][c] === 'M') {
           cell.style.backgroundColor = 'red';
