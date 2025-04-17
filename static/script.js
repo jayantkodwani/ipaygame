@@ -124,6 +124,7 @@ function checkWin() {
   if (revealedCount === safeCells) {
     clearInterval(timerInterval);
     alert('🎉 Congratulations! You cleared the board!');
+    document.getElementById("submitBtn").disabled = false;  // 🔥 Enables the submit button
   }
 }
 
