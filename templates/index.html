@@ -26,6 +26,21 @@
       font-weight: bold;
       text-align: center;
     }
+    
+    .instructions {
+      background-color: #f0f0f0;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+     .center-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   </style>
 
   
@@ -37,24 +52,26 @@
    </div>
   
  <!-- Game Instructions -->
-  <div style="background-color: #f0f0f0; padding: 10px; margin-bottom: 5px; border-radius: 5px; max-width: 1200px;">
-    <strong>How to Play:</strong>
-    <ul>
-      <li>Enter your name to start.</li>
-      <li>Left-click to reveal a cell.</li>
-      <li>Right-click to flag a cell suspected to have a mine (🚩).</li>
-      <li>The timer starts with your first click.</li>
-      <li>Reveal all non-mine cells to win the game! Don't forget to submit your scores by clicking Submit button</li>
-      <li>If you hit a mine, the game will reset automatically.</li>
-    </ul>
+   <!-- Instructions -->
+  <div class="instructions"> 
+      <strong>How to Play:</strong>
+      <ul>
+        <li>Enter your name to start.</li>
+        <li>Left-click to reveal a cell.</li>
+        <li>Right-click to flag a cell suspected to have a mine (🚩).</li>
+        <li>The timer starts with your first click.</li>
+        <li>Reveal all non-mine cells to win the game! Don't forget to submit your scores by clicking Submit button</li>
+        <li>If you hit a mine, the game will reset automatically.</li>
+      </ul>
   </div>
-  
-  <label>Name: <input type="text" id="playerName" /></label>
-  <div id="minesweeper-board" style="margin-top: 20px;"></div>
-  <p>Time: <span id="timer">0</span> seconds</p>
-  <button id="submitBtn" onclick="submitScore()" disabled>Submit Score</button>
-    <button onclick="startGame()">Reset Game</button>
-
+   <!-- Centered Game UI -->
+  <div class="center-container">    
+    <label>Name: <input type="text" id="playerName" /></label>
+    <div id="minesweeper-board" style="margin-top: 20px;"></div>
+    <p>Time: <span id="timer">0</span> seconds</p>
+    <button id="submitBtn" onclick="submitScore()" disabled>Submit Score</button>
+      <button onclick="startGame()">Reset Game</button>
+  </div>
 
   
 </body>
