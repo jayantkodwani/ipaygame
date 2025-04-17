@@ -2,12 +2,12 @@
 <html>
 <head>
   <title>Minesweeper</title>
-  <script src="/static/script.js"></script>
+  <script src="/static/script.js" defer></script>
 </head>
 <body>
   <h1>Minesweeper - Beginner</h1>
   <label>Name: <input type="text" id="playerName" /></label>
-  <div id="minesweeper-board"></div>
+  <div id="minesweeper-board" style="margin-top: 20px;"></div>
   <p>Time: <span id="timer">0</span> seconds</p>
   <button onclick="submitScore()">Submit Score</button>
 </body>
