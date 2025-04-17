@@ -78,6 +78,7 @@ function renderBoard() {
          } else if (revealed[r][c]) {
         cell.innerText = board[r][c] === 0 ? '' : board[r][c];
         if (board[r][c] === 'M') {
+          cell.innerText = "💣";                         // <-- shows bomb emoji
           cell.style.backgroundColor = 'red';
         }
       }
