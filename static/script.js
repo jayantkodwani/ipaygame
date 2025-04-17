@@ -93,7 +93,8 @@ function revealCell(r, c) {
   revealed[r][c] = true;
   if (board[r][c] === 'M') {
     clearInterval(timerInterval);
-    alert('Game Over! You hit a mine.');
+    alert('Game Over! Boom, You hit a mine.');
+    return;
   } else {
     if (board[r][c] === 0) {
       for (let i = -1; i <= 1; i++) {
