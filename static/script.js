@@ -91,7 +91,6 @@ function revealCell(r, c) {
   if (revealed[r][c] || flagged[r][c]) return;
   revealed[r][c] = true;
   if (board[r][c] === 'M') {
-    cell.innerText = "💣";                         // <-- shows bomb emoji
     clearInterval(timerInterval);
     alert('Game Over! Boom, You hit a mine.');
     startGame();  // 🔥 This line resets the game board after alert is dismissed
