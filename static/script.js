@@ -2,12 +2,15 @@ let boardSize = 9;
 let mineCount = 10;
 let board = [];
 let revealed = [];
+let flagged = [];
 let startTime = null;
 let timerInterval;
+let gameStarted = false;
 
 function generateBoard() {
   board = Array.from({ length: boardSize }, () => Array(boardSize).fill(0));
   revealed = Array.from({ length: boardSize }, () => Array(boardSize).fill(false));
+  flagged = Array.from({ length: boardSize }, () => Array(boardSize).fill(false));
 
   let minesPlaced = 0;
   while (minesPlaced < mineCount) {
@@ -59,8 +62,21 @@ function renderBoard() {
       cell.style.alignItems = 'center';
       cell.style.cursor = 'pointer';
       cell.style.backgroundColor = revealed[r][c] ? '#ddd' : '#bbb';
-      cell.onclick = () => revealCell(r, c);
-      if (revealed[r][c]) {
+      cell.oncontextmenu = (e) => { e.preventDefault(); flagCell(r, c); };
+      cell.onclick = () => {
+        if (!gameStarted) {
+          gameStarted = true;
+          startTime = Date.now();
+          timerInterval = setInterval(() => {
+            document.getElementById('timer').innerText = Math.floor((Date.now() - startTime) / 1000);
+          }, 1000);
+        }
+        revealCell(r, c);
+      };
+      if (flagged[r][c]) {
+        cell.innerText = "🚩";
+        cell.style.backgroundColor = "#eee";
+      } else if (revealed[r][c]) {
         cell.innerText = board[r][c] === 0 ? '' : board[r][c];
         if (board[r][c] === 'M') {
           cell.style.backgroundColor = 'red';
@@ -73,7 +89,7 @@ function renderBoard() {
 }
 
 function revealCell(r, c) {
-  if (revealed[r][c]) return;
+  if (revealed[r][c] || flagged[r][c]) return;
   revealed[r][c] = true;
   if (board[r][c] === 'M') {
     clearInterval(timerInterval);
@@ -92,16 +108,26 @@ function revealCell(r, c) {
   renderBoard();
 }
 
+function flagCell(r, c) {
+  if (revealed[r][c]) return;
+  flagged[r][c] = !flagged[r][c];
+  renderBoard();
+}
+
 function startGame() {
+  gameStarted = false;
+  clearInterval(timerInterval);
+  document.getElementById('timer').innerText = '0';
   generateBoard();
   renderBoard();
-  startTime = Date.now();
-  timerInterval = setInterval(() => {
-    document.getElementById('timer').innerText = Math.floor((Date.now() - startTime) / 1000);
-  }, 1000);
 }
 
 function submitScore() {
+  if (!gameStarted) {
+    alert("You haven't started the game yet!");
+    return;
+  }
+
   const name = document.getElementById('playerName').value;
   const score = Math.floor((Date.now() - startTime) / 1000);
 
