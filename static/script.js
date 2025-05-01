@@ -6,6 +6,7 @@ let flagged = [];
 let startTime = null;
 let timerInterval;
 let gameStarted = false;
+let finalTime = null;  
 
 function generateBoard() {
   board = Array.from({ length: boardSize }, () => Array(boardSize).fill(0));
@@ -125,6 +126,7 @@ function checkWin() {
   }
   if (revealedCount === safeCells) {
     clearInterval(timerInterval);
+    finalTime = Math.floor((Date.now() - startTime) / 1000);  // ✅ capture time when puzzle is completed
     alert('🎉 Congratulations! You cleared the board!');
     document.getElementById("submitBtn").disabled = false;  // 🔥 Enables the submit button
   }
@@ -156,7 +158,7 @@ function submitScore() {
     return;
   }
 
-  const score = Math.floor((Date.now() - startTime) / 1000);
+  const score = finalTime
 
   fetch('/submit-score', {
     method: 'POST',
